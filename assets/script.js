@@ -40,9 +40,35 @@ const questions = [
 const questionEl = document.getElementById("question");
 const answerBtns  = document.getElementById("answerBtns");
 const nextBtn  = document.getElementById("nextBtn");
-
+const timeEl = document.queryElementById("timer");
+const secondsLeft = 10
 let currentQuestionIndex = 0;
 let score = 0;
+
+function setTime() {
+    // Sets interval in variable
+    var timerInterval = setInterval(function() {
+      secondsLeft--;
+      timeEl.textContent = secondsLeft;
+  
+      if(secondsLeft === 0) {
+        // Stops execution of action at set interval
+        clearInterval(timerInterval);
+        // Calls function to create and append image
+        sendMessage();
+      }
+  
+    }, 1000);
+  }
+
+  function sendMessage() {
+    timeEl.textContent = "Times Up";
+
+    if(timeEl === "Times up") {
+        showScore();
+    }
+  }
+
 
 function startQuiz() {
     currentQuestionIndex = 0;
@@ -119,5 +145,5 @@ nextBtn.addEventListener("click", ()=>{
     }
 })
 
-
+setTime();
 startQuiz();
