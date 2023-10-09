@@ -25,6 +25,21 @@ body {
     font-weight: 600;
     border-bottom: 1px solid #333;
     padding-bottom: 30px;
+    text-align: center;
+}
+
+#startQuizBtn {
+    background: #001e4d;
+    color: #fff;
+    font-weight: 500;   
+    width: 150px;
+    border: 0;
+    padding: 10px;
+    margin: 20px auto 0;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+
 }
 
 .quizContainer {
@@ -32,6 +47,7 @@ body {
     color: #001e4d;
     font-weight: 600;
     font-size: 16px;
+    display: none; 
 }
 
 #question {

@@ -38,10 +38,11 @@ const questions = [
 ];
 
 const questionEl = document.getElementById("question");
+const timeEl = document.getElementById("timer");
 const answerBtns  = document.getElementById("answerBtns");
 const nextBtn  = document.getElementById("nextBtn");
-const timeEl = document.queryElementById("timer");
-const secondsLeft = 10
+const startQuizBtn = document.getElementById("startQuizBtn");
+let secondsLeft = 10;
 let currentQuestionIndex = 0;
 let score = 0;
 
@@ -55,26 +56,32 @@ function setTime() {
         // Stops execution of action at set interval
         clearInterval(timerInterval);
         // Calls function to create and append image
-        sendMessage();
+        showScore();
       }
   
     }, 1000);
-  }
+}
 
-  function sendMessage() {
-    timeEl.textContent = "Times Up";
+function sendMessage() {
+    timeEl.textContent = "Time's Up";
+    showScore();
+}
 
-    if(timeEl === "Times up") {
-        showScore();
-    }
-  }
+function startQuizFunc() {
+    var quizContainer = document.querySelector(".quizContainer");
 
+    startQuiz();
+}
 
 function startQuiz() {
+    var quizContainer = document.querySelector(".quizContainer");
     currentQuestionIndex = 0;
     score = 0;
+    quizContainer.style.display = 'block'
+    startQuizBtn.style.display = 'none'
     nextBtn.textContent = "Next";
     showQuestion();
+    setTime();
 }
 
 function showQuestion() {
@@ -89,7 +96,7 @@ function showQuestion() {
         button.classList.add("btn");
         answerBtns.appendChild(button);
         if(answer.correct){
-            button.dataset.correct =answer.correct;
+            button.dataset.correct = answer.correct;
         }
         button.addEventListener("click", selectAnswer)
     });
@@ -108,8 +115,17 @@ function selectAnswer(event) {
     if(isCorrect){
         selectedBtn.classList.add("correct")
         score ++;
+        secondsLeft += 2;
     } else {
         selectedBtn.classList.add("incorrect")
+        secondsLeft -= 2;
+
+        if(secondsLeft === 0) {
+            // Stops execution of action at set interval
+            clearInterval(timerInterval);
+            // Calls function to create and append image
+            showScore();
+        }
     }
     Array.from(answerBtns.children).forEach(button => {
         if(button.dataset.correct === "true"){
@@ -125,6 +141,14 @@ function showScore(){
     questionEl.textContent = `You scored ${score} out of ${questions.length}!`;
     nextBtn.textContent = 'Play again';
     nextBtn.style.display = "block";
+
+    nextBtn.addEventListener("click", function() {
+        window.location.reload(); // Reloads the page
+    });
+}
+
+function quizEnd() {
+    
 }
 
 function handleNextBtn(){
@@ -140,10 +164,10 @@ function handleNextBtn(){
 nextBtn.addEventListener("click", ()=>{
     if(currentQuestionIndex < questions.length){
         handleNextBtn();
-    } else {
-        startQuiz();
     }
-})
+});
 
-setTime();
-startQuiz();
+
+startQuizBtn.addEventListener("click", function(event){
+    startQuiz();
+});
