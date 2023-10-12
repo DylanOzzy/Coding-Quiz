@@ -57,7 +57,7 @@ function setTime() {
         secondsLeft--;
         timeEl.textContent = secondsLeft;
         
-        if(secondsLeft === 0) {
+        if(secondsLeft < 1) {
             // Stops execution of action at set interval
             clearInterval(timerInterval);
             // Calls function to create and append image
