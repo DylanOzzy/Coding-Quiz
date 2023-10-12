@@ -32,7 +32,8 @@ I made this webpage to demonstrate my current level of knowledge with Javascript
 
  [Coding-Quiz](https://github.com/DylanOzzy/Coding-Quiz)
 
- ![Coding-Quiz](assets\CodingQuiz.png.png)
+ ![Coding-Quiz](assets/CodingQuiz.png.png)
+ 
 
 
 
