@@ -1,3 +1,4 @@
+// These are the qustions with answers and data sets.
 const questions = [
     {
         question: "Which of the following is not a valid data type in JavaScript?", 
@@ -37,6 +38,7 @@ const questions = [
     }
 ];
 
+// Constants and Variables declared in global scope. 
 const questionEl = document.getElementById("question");
 const timeEl = document.getElementById("timer");
 const answerBtns  = document.getElementById("answerBtns");
@@ -50,7 +52,7 @@ let saveBtn = $("#saveBtn");
 const initialsForm = $("#initials-form")
 
 
-
+// Handles Timer function.
 function setTime() {
     // Sets interval in variable
     timerInterval = setInterval(function() {
@@ -67,16 +69,12 @@ function setTime() {
     }, 1500);
 };
 
+// Sends the time up message in the times textContent. 
 function sendMessage() {
     timeEl.textContent = "Time's Up";
 };
 
-function startQuizFunc() {
-    var quizContainer = document.querySelector(".quizContainer");
-    
-    startQuiz();
-};
-
+// This is called when "Start Quiz" button is pressed.
 function startQuiz() {
     var quizContainer = document.querySelector(".quizContainer");
     currentQuestionIndex = 0;
@@ -88,6 +86,7 @@ function startQuiz() {
     setTime();
 };
 
+// This handles how questions are displayed and appended to the page. 
 function showQuestion() {
     resetState();
     initialsForm.hide();
@@ -106,6 +105,7 @@ function showQuestion() {
     });
 };
 
+// This prevents the page from reverting back to default when a new question is loaded. 
 function resetState() {
     nextBtn.style.display = "none";
     while(answerBtns.firstChild) {
@@ -113,6 +113,7 @@ function resetState() {
     }
 };
 
+// This handles if answers are correct or incorrect and awards points and seconds, and also applies classes to use color indication.
 function selectAnswer(event) {
     const selectedBtn = event.target;
     const isCorrect = selectedBtn.dataset.correct === "true";
@@ -138,6 +139,7 @@ function selectAnswer(event) {
     nextBtn.style.display = "block"
 };
 
+//This shows the ending landing page for the quiz. Clears timer, shows times up, score, save initials, and reload the qiuz. 
 function showScore(){
     resetState();
     clearInterval(timerInterval);
@@ -152,6 +154,7 @@ function showScore(){
     
 };
 
+// This shows the next question in the currentQuestionIndex or shows score if there are no more questions. 
 function handleNextBtn(){
     currentQuestionIndex++;
     if(currentQuestionIndex < questions.length){
@@ -171,6 +174,7 @@ startQuizBtn.addEventListener("click", function(event){
     startQuiz();
 });
 
+// We started learning about jQuery so I wanted to use it. 
 saveBtn.on("click", (event)=>{
     const userInitials = $("#initials").val();
     event.preventDefault();
